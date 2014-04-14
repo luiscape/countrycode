@@ -12,28 +12,32 @@
 #' @keywords countrycode 
 #' @note Supports the following coding schemes: Correlates of War character, 
 #'   CoW-numeric, ISO3-character, ISO3-numeric, ISO2-character, IMF numeric, FIPS 10-4,
-#'   FAO numeric, United Nations numeric, World Bank character, 
+#'   FAO numeric, United Nations numeric (?), World Bank character, 
 #'   official English short country names (ISO), continent, region. 
+#'   
+#'   Note: In the HDX-Dictionary it also supports: HDX Focus Country (T/F), OCHA Office 
+#'   Code, OCHA Name in English, HumanitarianResponse link, country name in English, Spanish and French.
 #' 
 #'   The following strings can be used as arguments for \code{origin} or
 #'   \code{destination}: "cowc", "cown", "iso3c", "iso3n", "iso2c", "imf",
-#'   "fips104", "fao", "un", "wb", "country.name".  The following strings can be
-#'   used as arguments for \code{destination} \emph{only}:  "continent", "region" 
+#'   "fips104", "fao", "un", "wb", "country.name", "hdx-focus".  The following strings can be
+#'   used as arguments for \code{destination} \emph{only}:  "continent", "region", 
+#'   "ocha-office-code", "ocha-office-name".
 #' @export
 #' @aliases countrycode
 #' @examples
-#' codes.of.origin <- countrycode_data$cowc # Vector of values to be converted
+#' codes.of.origin <- hdx.dictionary$cowc # Vector of values to be converted
 #' countrycode(codes.of.origin, "cowc", "iso3c")
 countrycode <- function (sourcevar, origin, destination, warn=FALSE){
     # Sanity check
-    origin_codes <- names(countrycode_data)[!(names(countrycode_data) %in% c("continent","region","regex"))]
-    destination_codes <- names(countrycode_data)[!(names(countrycode_data) %in% c("regex"))]
+    origin_codes <- names(hdx.dictionary)[!(names(hdx.dictionary) %in% c("continent","region","regex","ocha-office-code", "ocha-office-name"))]
+    destination_codes <- names(hdx.dictionary)[!(names(hdx.dictionary) %in% c("regex"))]
     if (!origin %in% origin_codes){stop("Origin code not supported")}
     if (!destination %in% destination_codes){stop("Destination code not supported")}
     if (origin == 'country.name'){
-        dict = na.omit(countrycode_data[,c('regex', destination)])
+        dict = na.omit(hdx.dictionary[,c('regex', destination)])
     }else{
-        dict = na.omit(countrycode_data[,c(origin, destination)])
+        dict = na.omit(hdx.dictionary[,c(origin, destination)])
     }
     # Prepare output vector
     destination_vector <- rep(NA, length(sourcevar))
@@ -111,6 +115,6 @@ countrycode_test <- function(){
         warning('nomatch test failed')
     }
     # Multiple regex matches
-    x = countrycode(countrycode_data[,'country.name'], 'country.name', 'cowc', warn=TRUE)  
+    x = countrycode(hdx.dictionary[,'country.name'], 'country.name', 'cowc', warn=TRUE)  
     return(test_result)
 }

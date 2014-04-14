@@ -1,6 +1,6 @@
 #' Country code translation data frame
 #' 
-#' A data frame with 262 observations on the following 14 variables.
+#' A data frame with 144 observations on the following 23 variables.
 #' Used internally by the \code{countrycode()} function.
 #' 
 #' \itemize{
@@ -19,6 +19,14 @@
 #'   \item regex: Regular expression used to convert long names to code 
 #'   \item region: Regions as defined in the World Bank Development Indicators 
 #'   \item continent: Continent as defined in the World Bank Development Indicators 
+#'   \item Name..es.: Name of the country in Spanish. 
+#'   \item country.name.package.temp: original name in the `countrycode` package.
+#'   \item Name..fr.: Name of the country in French. 
+#'   \item Preferred.languages: 'official' language used in the country. 
+#'   \item HDX.Focus.Country: if 'TRUE' = the country is a country-focus in HDx.
+#'   \item Office.code: the code of the office in which this country falls into
+#'   \item Office.name..en.: The name of the office in English.
+#'   \item HumanitarianResponse.link: link to the humanitarian response website.
 #'  
 #' }
 #' 
@@ -45,6 +53,6 @@
 #' @keywords datasets
 #' @name countrycode_data 
 #' @usage countrycode_data
-#' @format A data frame with 260 rows and 11 columns
+#' @format A data frame with 144 rows and 23 columns
 NULL
 
