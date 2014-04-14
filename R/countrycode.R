@@ -114,4 +114,3 @@ countrycode_test <- function(){
     x = countrycode(countrycode_data[,'country.name'], 'country.name', 'cowc', warn=TRUE)  
     return(test_result)
 }
-
